@@ -2,7 +2,7 @@
 
 This issue appear when you try to build gcc which is older than system default gcc.
 
-In this case Ubuntu 16.04 LTS and one try gcc build is 4.8.5.
+In this case Ubuntu 16.04 LTS has GCC 5.4.0 and gcc build is 4.8.5.
 
 GCC Build command
 
@@ -16,7 +16,7 @@ mkdir build
 
 cd build
 
-#### If everything go good, your get the build OR you may get error message something like this.
+#### If successfull, you get 4.8.5 build OR you get error message something like this.
 
 make[5]: Entering directory '/local/foo/build/x86_64-linux-gnu/libstdc++-v3/po'
 
@@ -28,11 +28,11 @@ Makefile:460: recipe for target 'de.mo' failed
 
 make[5]: *** [de.mo] Error 1
 
-#### Problem caused by uincompatibilty between system libstdc++.so.6 and gcc build /local/foo/build/x86_64-linux-gnu/libstdc++-v3/src/.libs/libstdc++.so.6
+#### Problem caused by incompatibility between system libstdc++.so.6 and gcc build /local/foo/build/x86_64-linux-gnu/libstdc++-v3/src/.libs/libstdc++.so.6
 
-msgfmt expecting system libstdc++.so.6 but gcc build providing gcc built local/foo/build/x86_64-linux-gnu/libstdc++-v3/src/.libs/libstdc++.so.6
+msgfmt expecting system libstdc++.so.6 but gcc build infrastructure providing libstdc++.so.6 from local/foo/build/x86_64-linux-gnu/libstdc++-v3/src/.libs/libstdc++.so.6.
 
-#### Lets dig little further.
+#### Lets dig little deeper.
 
 $ ldd /usr/bin/msgfmt | grep libstdc
         libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007ffb6c1c3000)
@@ -101,7 +101,7 @@ CXXABI_1.3.7
 
 CXXABI_1.3.3
 
-As you can see GCC built libstdc++.so.6 doesn't have support for CXXABI_1.3.8, needed for msgfmt. Issue here, gcc build sets LD_LIBRARY_PATH and prepend gcc build libstdc++.so.6 before system libstdc++.so.6. Since library name(libstdc++.so.6) is exactly same it pickup gcc built one.
+As you can see GCC built libstdc++.so.6 doesn't have support for CXXABI_1.3.8, needed for msgfmt. Issue here, gcc build sets LD_LIBRARY_PATH and prepend gcc built libstdc++.so.6 before system libstdc++.so.6. Since library name(libstdc++.so.6) is exactly same it pickup gcc built one.
 
 This happens when gcc version under build is lower than system default gcc. To get around this problem, just create a wrapper for the affected tool i.e.
 
