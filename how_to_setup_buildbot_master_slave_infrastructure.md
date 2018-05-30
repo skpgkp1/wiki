@@ -103,3 +103,7 @@
     
     $buildslave start
     
+### Verify whether buildbot is up and running
+
+    http://masterserver:8010
+    
