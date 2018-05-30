@@ -98,9 +98,10 @@
     180530 16:08:49 mysqld_safe Starting mysqld daemon with databases from /local/foo/mariadbbin/data
     $sleep 5
 
-### Sysbench read test
+### Sysbench oltp_read test
 
     $cd /local/foo/mariadbbin
+    $export testlua_script="oltp_read_only.lua"
     $export TEST_DIR=/usr/share/sysbench
     $bin/mysqladmin -u root --socket=/local/foo/mariadbbin/tmp/mysql.sock drop sbtest -f
     $bin/mysqladmin -u root --socket=/local/foo/mariadbbin/tmp/mysql.sock create sbtest
