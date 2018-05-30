@@ -49,7 +49,9 @@
 ### Mariadb install database
 
     $cd /local/foo/mariadbbin
-    $scripts/mysql_install_db --user=user1 --basedir=/local/foo/mariadbbin --defaults-file=/local/foo/mariadbbin/my.cnf
+    $scripts/mysql_install_db --user=user1 --basedir=/local/foo/mariadbbin \
+    --defaults-file=/local/foo/mariadbbin/my.cnf
+    
     Installing MariaDB/MySQL system tables in '/local/foo/mariadbbin/data' ...
     OK
 
