@@ -5,7 +5,8 @@
     $mkdir /local/foo
     $git clone https://github.com/MariaDB/server.git mariadb
     $cd mariadb
-    $cmake  -DCMAKE_INSTALL_PREFIX=/local/foo/mariadbbin -DCMAKE_C_COMPILER:FILEPATH=`which gcc` -DCMAKE_CXX_COMPILER:FILEPATH=`which g++`  -DBUILD_CONFIG=mysql_release -DWITH_JEMALLOC=yes .
+    $cmake  -DCMAKE_INSTALL_PREFIX=/local/foo/mariadbbin -DCMAKE_C_COMPILER:FILEPATH=`which gcc` \
+    -DCMAKE_CXX_COMPILER:FILEPATH=`which g++`  -DBUILD_CONFIG=mysql_release -DWITH_JEMALLOC=yes .
     $/usr/bin/make VERBOSE=1 -j32
     $/usr/bin/make install
     
