@@ -94,7 +94,21 @@
     $bin/mysqld_safe --defaults-file=my.cnf --no-auto-restart
     180530 16:08:49 mysqld_safe Logging to '/local/foo/mariadbbin/log/mysqld.log'.
     180530 16:08:49 mysqld_safe Starting mysqld daemon with databases from /local/foo/mariadbbin/data
-    $sleep 5    
+    $sleep 5
+
+### Sysbench read test
+
+    $cd /local/foo/mariadbbin
+    $export TEST_DIR=/usr/share/sysbench
+    $bin/mysqladmin -u root --socket=/local/foo/mariadbbin/tmp/mysql.sock drop sbtest -f
+    $bin/mysqladmin -u root --socket=/local/foo/mariadbbin/tmp/mysql.sock create sbtest
+    $sysbench ${TEST_DIR}/oltp_read_only.lua --mysql-socket=/local/foo/mariadbbin/tmp/mysql.sock \
+    --mysql-user=root --db-driver=mysql --time=60  --threads=48 prepare
+    $sysbench ${TEST_DIR}/oltp_read_only.lua --mysql-socket=/local/foo/mariadbbin/tmp/mysql.sock \
+    --mysql-user=root --db-driver=mysql --time=60 --threads=48 run
+
+   
+
 
 
     
