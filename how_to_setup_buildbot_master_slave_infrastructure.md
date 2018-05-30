@@ -50,6 +50,11 @@
     $cd master
 
     $cp master.cfg.sample master.cfg
+    
+    $ sdiff -s master.cfg.sample master.cfg
+    c['workers'] = [worker.Worker("example-worker", "pass")]      | c['workers'] = [worker.Worker("slaveuser1", "slavepass1"
+          workernames=["example-worker"],                         |       workernames=["slaveserver"],
+    c['buildbotURL'] = "http://localhost:8010/"                   | c['buildbotURL'] = "http://masterserver:8010/"
 
     $buildbot start .
 
