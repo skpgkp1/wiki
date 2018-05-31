@@ -127,7 +127,7 @@
         write:                           0
         other:                           753052
         total:                           6024416
-    transactions:                        376526 (6273.51 per sec.)
+    transactions:                        376526 (**6273.51 per sec.**)
     queries:                             6024416 (100376.21 per sec.)
     ignored errors:                      0      (0.00 per sec.)
     reconnects:                          0      (0.00 per sec.)
