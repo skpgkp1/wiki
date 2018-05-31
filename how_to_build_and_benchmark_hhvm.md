@@ -1,4 +1,4 @@
-Steps to Build and Benchmark latest HHVM(mainline) on Fedora(27)
+Steps to Build and Benchmark HHVM(mainline) on Fedora(27)
 
 ##### Please use latest GCC or Clang compiler to build latest HHVM as older version may not able to build due to cutting edge c++ feature inclusion.
  
