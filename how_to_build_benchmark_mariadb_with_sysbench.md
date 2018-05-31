@@ -102,13 +102,14 @@
 
     $cd /local/foo/mariadbbin
     $export testlua_script="oltp_read_only.lua"
+    $export num_thread=48
     $export TEST_DIR=/usr/share/sysbench
     $bin/mysqladmin -u root --socket=/local/foo/mariadbbin/tmp/mysql.sock drop sbtest -f
     $bin/mysqladmin -u root --socket=/local/foo/mariadbbin/tmp/mysql.sock create sbtest
-    $sysbench ${TEST_DIR}/oltp_read_only.lua --mysql-socket=/local/foo/mariadbbin/tmp/mysql.sock \
-    --mysql-user=root --db-driver=mysql --time=60  --threads=48 prepare
-    $sysbench ${TEST_DIR}/oltp_read_only.lua --mysql-socket=/local/foo/mariadbbin/tmp/mysql.sock \
-    --mysql-user=root --db-driver=mysql --time=60 --threads=48 run
+    $sysbench ${TEST_DIR}/${testlua_script} --mysql-socket=/local/foo/mariadbbin/tmp/mysql.sock \
+    --mysql-user=root --db-driver=mysql --time=60  --threads=${num_thread} prepare
+    $sysbench ${TEST_DIR}/${testlua_script} --mysql-socket=/local/foo/mariadbbin/tmp/mysql.sock \
+    --mysql-user=root --db-driver=mysql --time=60 --threads=${num_thread} run
 
     sysbench 1.0.14 (using system LuaJIT 2.1.0-beta3)
 
@@ -127,7 +128,7 @@
         write:                           0
         other:                           753052
         total:                           6024416
-    transactions:                        376526 (**6273.51 per sec.**)
+    transactions:                        376526 (6273.51 per sec.)
     queries:                             6024416 (100376.21 per sec.)
     ignored errors:                      0      (0.00 per sec.)
     reconnects:                          0      (0.00 per sec.)
@@ -146,6 +147,37 @@
     Threads fairness:
         events (avg/stddev):           7844.2917/216.92
         execution time (avg/stddev):   59.9798/0.00
+        
+### Result
+
+Look at the following line.
+
+transactions:                        376526 (**6273.51 per sec.**)
+
+ignored errors:                      0      (0.00 per sec.)
+
+
+Transactions per second is measure of performance in above case. Higher is better.
+
+Ignored error should be zero. Number of thread should be adjusted according to machine configuration.
+
+### Other test case
+
+Exact same process apply for other database test too. Just change the **testlua_script** parameter and look for \
+transaction per second (higher is better).
+
+testlua_script could be any one of following script depending upon sysbench version.
+
+**bulk_insert.lua  oltp_point_select.lua  oltp_update_non_index.lua**
+
+**oltp_common.lua  oltp_read_only.lua     oltp_write_only.lua**
+
+**oltp_delete.lua  oltp_read_write.lua    select_random_points.lua**
+
+**oltp_insert.lua  oltp_update_index.lua  select_random_ranges.lua**
+
+
+
 
 
 
