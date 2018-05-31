@@ -1,4 +1,4 @@
-Steps to Build and Benchmark latest HHVM(mainline) on latest Fedora(27)
+Steps to Build and Benchmark latest HHVM(mainline) on Fedora(27)
 
 ##### Please use latest GCC or Clang compiler to build latest HHVM as older version may not able to build due to cutting edge c++ feature inclusion.
  
@@ -40,7 +40,7 @@ $git submodule update --init --recursive
 
 HHVM code should be fully downloaded after these steps. Now hhvm can be build with different compilers
 
-### Building with latest GCC(7.x)
+### Building with GCC(7.x)
 
 ##### Configure
 
@@ -54,7 +54,7 @@ $/usr/bin/make VERBOSE=1 SHELL="sh -x"
 
 $/usr/bin/make install
 
-### Building with latest Clang(5.x)
+### Building with Clang(5.x)
 
 ##### Configure
 
