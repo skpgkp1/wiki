@@ -110,7 +110,44 @@
     $sysbench ${TEST_DIR}/oltp_read_only.lua --mysql-socket=/local/foo/mariadbbin/tmp/mysql.sock \
     --mysql-user=root --db-driver=mysql --time=60 --threads=48 run
 
-   
+    sysbench 1.0.14 (using system LuaJIT 2.1.0-beta3)
+
+    Running the test with following options:
+    Number of threads: 48
+    Initializing random number generator from current time
+
+
+    Initializing worker threads...
+
+    Threads started!
+
+    SQL statistics:
+    queries performed:
+        read:                            5271364
+        write:                           0
+        other:                           753052
+        total:                           6024416
+    transactions:                        376526 (6273.51 per sec.)
+    queries:                             6024416 (100376.21 per sec.)
+    ignored errors:                      0      (0.00 per sec.)
+    reconnects:                          0      (0.00 per sec.)
+
+    General statistics:
+        total time:                          60.0165s
+        total number of events:              376526
+
+    Latency (ms):
+         min:                                    1.23
+         avg:                                    7.65
+         max:                                   23.16
+         95th percentile:                        9.06
+         sum:                              2879028.68
+
+    Threads fairness:
+        events (avg/stddev):           7844.2917/216.92
+        execution time (avg/stddev):   59.9798/0.00
+
+
 
 
 
