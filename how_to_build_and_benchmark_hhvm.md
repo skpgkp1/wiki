@@ -223,3 +223,10 @@ First look at "Siege failed requests". Result is not valid if it is NOT 0.
 
 Look for "Siege RPS" number. Higher is better.
 
+### Note #1
+
+If you are using GCC 5 and up on RedHat/CentOS 7 machine, you may get undefined reference issue due to ABI incompatibility. \
+Use following cmake configuration option to get around this issue.
+
+-DCMAKE_CXX_FLAGS=-D_GLIBCXX_USE_CXX11_ABI=0
+
