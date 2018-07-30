@@ -38,6 +38,13 @@ cd ${HOME}/web/
 #Fix apache configuration file
 cd ${HOME}/web/conf
 
+$ sdiff -s httpd.conf httpd.conf.orig
+Listen 8080                                                   | Listen 80
+LoadModule cgid_module modules/mod_cgid.so                    | #LoadModule cgid_module modules/mod_cgid.so
+LoadModule perl_module modules/mod_perl.so                    <
+    DirectoryIndex index.html /cgi-bin/index.pl               |     DirectoryIndex index.html
+
+
 #Fix server network so that all traffic comming to port 80 get forwarded to 8080
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 
@@ -56,5 +63,5 @@ cd /local/lab_dss/web/bin
 
 #Stop apache server
 cd /local/lab_dss/web/bin
-./apachectl start
+./apachectl stop
 
