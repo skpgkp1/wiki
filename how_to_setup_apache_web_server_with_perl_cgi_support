@@ -1,0 +1,60 @@
+First download latest apache files in a dir say HOME(/local)
+
+Save you actual htdocs and cgi-bin file to some network location in case you have to reinstall webserver say NETWORK(/network)
+
+cd $HOME
+
+wget http://mirrors.sonic.net/apache//httpd/httpd-2.4.34.tar.bz2
+wget http://mirrors.sonic.net/apache//apr/apr-1.6.3.tar.bz2
+wget http://mirrors.sonic.net/apache//apr/apr-util-1.6.1.tar.bz2
+wget http://download.nextag.com/apache/perl/mod_perl-2.0.10.tar.gz
+
+#Untar
+
+tar -jxvf httpd-2.4.34.tar.bz2
+cd httpd-2.4.34/
+mkdir  -p srclib
+cd srclib
+tar -jxvf ../../apr-1.6.3.tar.bz2
+tar -jxvf ../../apr-util-1.6.1.tar.bz2
+mv apr-1.6.3 apr
+mv apr-util-1.6.1 apr-util
+cd ..
+./buildconf
+./configure --with-included-apr CC=gcc CXX=g++ --prefix=${HOME}/web --enable-module=so
+make -j8
+make install
+
+# Install perl module for cgi execution.
+cd $HOME
+tar -zxvf mod_perl-2.0.10.tar.gz
+cd mod_perl-2.0.10/
+perl Makefile.PL MP_APXS=${HOME}/web/bin/apxs
+make
+make install
+
+cd ${HOME}/web/
+
+#Fix apache configuration file
+cd ${HOME}/web/conf
+
+#Fix server network so that all traffic comming to port 80 get forwarded to 8080
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+#Save the original cgi-bin, htdocs dir
+mv ${HOME}/web/cgi-bin ${HOME}/web/cgi-bin.old
+mv ${HOME}/web/htdocs ${HOME}/web/htdocs.old
+
+cd ${HOME}/web
+#Link cgi-bin, htdocs directory from your network saved one
+ln -s ${NETWORK}/cgi-bin cgi-bin
+ln -s ${NETWORK}/htdocs htdocs
+
+#Start apache server
+cd /local/lab_dss/web/bin
+./apachectl start
+
+#Stop apache server
+cd /local/lab_dss/web/bin
+./apachectl start
+
