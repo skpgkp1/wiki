@@ -23,8 +23,8 @@ Goal is to cutdown server.cpp.i content to exactly produce one install of error 
 ### Create a shell script say test.sh like.
 
 $ cat test.sh
-/usr/bin/g++ -g -O2 -pthread -ftemplate-depth-256 -c -o server.cpp.o server.cpp.i && \
-! g++ -g -O2 -pthread -ftemplate-depth-256 -c -o server.cpp.o server.cpp.i > log 2>&1 && \
+/local/foo/good/g++ -g -O2 -pthread -ftemplate-depth-256 -c -o server.cpp.o server.cpp.i && \
+! /local/foo/bad/g++ -g -O2 -pthread -ftemplate-depth-256 -c -o server.cpp.o server.cpp.i > log 2>&1 && \
 export pp=\``grep ' error:' log | wc -l`\` &&  export tt=\``grep ' error: ambiguous overload for ' log | wc -l`\`  && \
 if [ $tt -eq 1 ] && [ $pp -eq 1 ] ; then     exit 0; else     exit 1; fi
 
