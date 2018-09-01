@@ -8,9 +8,9 @@ CPU 2017 Install Directory: ```/local/foo/cpu2017```
 
 GCC Install Directory: ```/local/foo/comp/gcc```
 
+```
 
 $ cd /local/foo/cpu2017
-```
 $ ./spec2017.rate
 runcpu v5038 - Copyright 1999-2016 Standard Performance Evaluation Corporation
 Using 'linux-x86_64' tools
