@@ -1,4 +1,4 @@
-### How to run spec CPU2017 for speed.
+### How to run spec CPU2017 for ```speed```.
 
 #### Understanding and running cpu benchmark is quite complex to grasp. Here is my simple setup to run cpu CPU2017 run with gcc.
 
