@@ -24,7 +24,7 @@ $git bisect start `4b20caf22d16ef930be847716d2836290816a25e`  `45ca481a56e94c12a
 
 Good case return 0 and bad case retrun non-zero.
 
-$git bisect run /local/foo/hhvm_perf_triage.sh > /tmp/log 2>/&1
+$git bisect run /local/foo/hhvm_perf_triage.sh > /tmp/log 2>&1
 
 ```
 
