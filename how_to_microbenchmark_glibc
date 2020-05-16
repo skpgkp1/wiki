@@ -1,0 +1,46 @@
+# Checkout glibc source file
+
+$git clone git://sourceware.org/git/glibc.git
+$cd /local/skpandey/glibctest/glibc/benchtests
+README file contains all benchmark details.
+Build
+$git clone ssh://git@gitlab.devtools..com:29418/tools-infrastructure/tools-build.git
+$cd tools_build
+$cd /local/skpandey/glibctest/tools-build/glibc
+$cat config.make
+$ cat config.make
+GLIBC-SOURCE-DIR=/local/skpandey/glibctest/glibc
+$make glibc
+$cd /local/skpandey/glibctest/tools-build/glibc/build-x86_64-linux
+$make bench
+It will build all the microbenchmark file which can be executed dynamically
+
+Individual benchmark can be run as
+/local/skpandey/glibctest/tools-build/glibc/build-x86_64-linux/benchtests/bench-memmove
+
+Result look something like this
+
+
+ "timing_type": "hp_timing",
+ "functions": {
+  "memmove": {
+   "bench-variant": "default",
+   "ifuncs": ["generic_memmove", "__memmove_avx_unaligned", "__memmove_avx_unaligned_erms", "__memmove_avx512_no_vzeroupper", "__memmove_avx51
+2_unaligned", "__memmove_avx512_unaligned_erms", "__memmove_ssse3_back", "__memmove_ssse3", "__memmove_erms", "__memmove_sse2_unaligned", "__m
+emmove_sse2_unaligned_erms"],
+   "results": [
+    {
+     "length": 1,
+     "align1": 0,
+     "align2": 32,
+     "timings": [6.19385, 5.50952, 5.49878, 10.4961, 5.69482, 5.68359, 5.63403, 6.39966, 25.55, 4.99097, 4.96948]
+    },
+    
+    length: length of memory
+    align1: Source memory alignment
+    align2: Destination memory alignment
+    timings: default unit is number of cpu cycle spent
+    
+    Alternative to buiod benchmark for timing
+    
+    $make USE_RDTSCP=1 bench
