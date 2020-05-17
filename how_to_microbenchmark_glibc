@@ -44,3 +44,17 @@ emmove_sse2_unaligned_erms"],
     Alternative to buiod benchmark for timing
     
     $make USE_RDTSCP=1 bench
+    
+    IF we have to restrict testing to certain implementation, we need to edit following file.
+    
+    glibc/sysdeps/x86_64/multiarch/ifunc-impl-list.c
+    
+    Look under IFUNC_IMPL
+    
+    Here we can also add other implmentation to benchmark. Add entry
+    
+    IFUNC_IMPL_ADD
+    
+    
+    
+    
