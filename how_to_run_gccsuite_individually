@@ -1,0 +1,39 @@
+GCC suite takes very long time to run. Her is how to run individual exp file.
+
+Find the exp file say i386.exp
+
+Create a workspace
+$mkdir foo
+
+Checkout latest gcc
+$git clone git://gcc.gnu.org/git/gcc.git
+
+Checkout build build tool
+$git clone ssh://git@gitlab.devtools..com:29418/tools-infrastructure/tools-build.git
+
+Create config file
+
+$cd foo/tools-build/gcc-debug
+$ cat config.make
+GCC-SOURCE-DIR=/local/skpandey/gccwork/gccregression/gcc
+CONFIG-FLAGS=--with-arch=native --with-cpu=native
+LANGS=c,c++,fortran
+MAX-NUM-CPUS=80
+
+Build debug gcc
+$make && make install
+
+Test the individual exp file
+
+$make RUNTESTFLAGS=i386.exp check > log 2>&1
+
+It will find i386.exp file from entire suite and run all test related to this exp file.
+
+Where to summary and log file for individual test
+
+$ ls -1 ./build-x86_64-linux/gcc/testsuite/gcc/gcc.sum ./build-x86_64-linux/gcc/testsuite/gcc/gcc.log
+./build-x86_64-linux/gcc/testsuite/gcc/gcc.log
+./build-x86_64-linux/gcc/testsuite/gcc/gcc.sum
+
+*.log file has exact compile command line along with compiler path.
+*.sum file has the individual test summary whether it pass or failed.
