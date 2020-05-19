@@ -27,6 +27,8 @@ Test the individual exp file
 
 $make RUNTESTFLAGS=gcc.target/i386/i386.exp check > log 2>&1
 
+GCC individual test can be run in similar way.
+
 It will find i386.exp file from entire suite and run all test related to this exp file.
 
 Where to summary and log file for individual test
@@ -37,3 +39,19 @@ $ ls -1 ./build-x86_64-linux/gcc/testsuite/gcc/gcc.sum ./build-x86_64-linux/gcc/
 
 *.log file has exact compile command line along with compiler path.
 *.sum file has the individual test summary whether it pass or failed.
+
+How to run gccsuite individual test
+
+$cd /local/skpandey/gccwork/cpuidtest/tools-build/gcc-debug
+$ cat config.make
+GCC-SOURCE-DIR=/local/skpandey/gccwork/cpuidtest/gcc
+LANGS=c,c++,fortran
+MAX-NUM-CPUS=24
+$ make
+
+$cd build-x86_64-linux/gcc
+$make check-gcc RUNTESTFLAGS="--target_board='unix{-m32,}' i386.exp=builtin_target.c"
+
+target_board direct different option. Above test will run with x64 as default plus with -m32 option.
+
+
