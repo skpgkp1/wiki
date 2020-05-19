@@ -1,0 +1,15 @@
+Make a workspace and checkout glibc directory
+
+$mkdir /local/skpandey/glibctest
+$cd /local/skpandey/glibctest
+$git clone git://sourceware.org/git/glibc.git
+$git clone ssh://git@gitlab.devtools.intel.com:29418/tools-infrastructure/tools-build.git
+$cd tools-build/glibc
+$ cat config.make
+GLIBC-SOURCE-DIR=/local/skpandey/glibctest/glibc
+
+$nohup make one
+$make check
+$vim build-x86_64-linux/string/subdir-tests.sum
+$cd /local/skpandey/glibctest/tools-build/glibc/build-x86_64-linux
+$gdb ./string/test-strncmp
