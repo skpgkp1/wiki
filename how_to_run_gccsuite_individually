@@ -25,7 +25,7 @@ $make && make install
 
 Test the individual exp file
 
-$make RUNTESTFLAGS=i386.exp check > log 2>&1
+$make RUNTESTFLAGS=gcc.target/i386/i386.exp check > log 2>&1
 
 It will find i386.exp file from entire suite and run all test related to this exp file.
 
