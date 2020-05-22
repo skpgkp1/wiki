@@ -1,0 +1,18 @@
+First prepare glibc workspace.
+
+$mkdir /local/skpandey/glibctest
+$cd /local/skpandey/glibctest
+
+$git clone git://sourceware.org/git/glibc.git
+$git clone ssh://git@gitlab.devtools..com:29418/tools-infrastructure/tools-build.git
+
+$cd tools-build/glibc
+$ cat config.make
+GLIBC-SOURCE-DIR=/local/skpandey/glibctest/glibc
+
+$make one && make check
+
+
+
+
+
