@@ -1,0 +1,22 @@
+sudo cpupower -c all frequency-set  -g userspace
+sudo cpupower -c all frequency-set --max 2000000 --min 2000000
+
+#Check cpu frequency
+
+$ sudo cpupower -c 1 frequency-info
+analyzing CPU 1:
+  driver: intel_cpufreq
+  CPUs which run at the same hardware frequency: 1
+  CPUs which need to have their frequency coordinated by software: 1
+  maximum transition latency: 20.0 us
+  hardware limits: 1000 MHz - 3.70 GHz
+  available cpufreq governors: conservative ondemand userspace powersave performance schedutil
+  current policy: frequency should be within 2.00 GHz and 2.00 GHz.
+                  The governor "userspace" may decide which speed to use
+                  within this range.
+  current CPU frequency: Unable to call hardware
+  current CPU frequency: 2.00 GHz (asserted by call to kernel)
+  boost state support:
+    Supported: yes
+    Active: yes
+
